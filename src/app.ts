@@ -32,6 +32,15 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
+// 404 route
+app.use((req: Request, res: Response) => {
+  res.status(404).json({
+    message: "Route not found",
+    success: false,
+    error: `Cannot ${req.method} ${req.originalUrl}`,
+  });
+});
+
 // Global error handler
 app.use((error: any, req: Request, res: Response, next: any) => {
   res.status(500).json({
